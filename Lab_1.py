@@ -75,7 +75,6 @@ def process_triangle(side_a_str: str, side_b_str: str, side_c_str: str):
     logging.info(f"Результат: тип='{triangle_type}', вершины={coordinates}")
     return triangle_type, coordinates
 
-
 def main():
     os.makedirs("Logs", exist_ok=True)
 
@@ -114,7 +113,6 @@ def main():
     print(f"Тест 6: {test6}")
 
     logging.info("Тестирование завершено")
-
 
 if __name__ == "__main__":
     main()
