@@ -3,14 +3,14 @@ import math
 import os
 import sys
 
-def process_triangle(side_a_str: str, side_b_str: str, side_c_str: str):
-    logging.info(f"Старт обработки сторон: a='{side_a_str}', b='{side_b_str}', c='{side_c_str}'")
+def process_triangle(a_str: str, b_str: str, c_str: str):
+    logging.info(f"Старт обработки сторон: a='{a_str}', b='{b_str}', c='{c_str}'")
 
     # делаем флоат
     try:
-        a = float(side_a_str)
-        b = float(side_b_str)
-        c = float(side_c_str)
+        a = float(a_str)
+        b = float(b_str)
+        c = float(c_str)
     except ValueError:
         logging.error("Входные данные не являются действительными числами.")
         logging.exception("Исключение ValueError:")
