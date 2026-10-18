@@ -4,7 +4,7 @@ from src.lab1 import process_triangle
 
 class TestMyProject(unittest.TestCase):
 
-    # 1. Валидные сценарии (Корректное определение типов)
+    # Определение типов
     def test_equilateral_triangle_returns_correct_type(self):
         triangle_type, _ = process_triangle("10", "10", "10")
         self.assertEqual(triangle_type, "равносторонний")
@@ -21,63 +21,63 @@ class TestMyProject(unittest.TestCase):
         triangle_type, _ = process_triangle("5.5", "5.5", "8.2")
         self.assertEqual(triangle_type, "равнобедренный")
 
-    # 2. Невалидный ввод (ValueError)
+    # проверяем неправильный ввод
     def test_invalid_string_input_a_returns_error_code(self):
         type_res, coords = process_triangle("abc", "10", "10")
-        self.assertEqual(type_res, "")
-        self.assertEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
+        self.assertFalse(type_res)
+        self.assertListEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
 
     def test_invalid_string_input_b_returns_error_code(self):
         type_res, coords = process_triangle("10", "xyz", "10")
-        self.assertEqual(type_res, "")
-        self.assertEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
+        self.assertFalse(type_res)
+        self.assertListEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
 
     def test_invalid_string_input_c_returns_error_code(self):
         type_res, coords = process_triangle("10", "10", "???")
-        self.assertEqual(type_res, "")
-        self.assertEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
+        self.assertFalse(type_res)
+        self.assertListEqual(coords, [(-2, -2), (-2, -2), (-2, -2)])
 
-    # 3. Граничные и невалидные длины сторон (<= 0)
+    # также стороны
     def test_zero_side_a_returns_not_triangle(self):
         type_res, coords = process_triangle("0", "5", "5")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
     def test_negative_side_a_returns_not_triangle(self):
         type_res, coords = process_triangle("-3", "4", "5")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
     def test_negative_side_b_returns_not_triangle(self):
         type_res, coords = process_triangle("3", "-4", "5")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
     def test_negative_side_c_returns_not_triangle(self):
         type_res, coords = process_triangle("3", "4", "-5")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
-    # 4. Нарушение неравенства треугольника (a + b <= c)
+    # не треугольники
     def test_sum_of_two_sides_equal_third_returns_not_triangle(self):
         type_res, coords = process_triangle("2", "3", "5")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
     def test_sum_of_two_sides_less_than_third_returns_not_triangle(self):
         type_res, coords = process_triangle("10", "10", "100")
         self.assertEqual(type_res, "не треугольник")
-        self.assertEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
+        self.assertListEqual(coords, [(-1, -1), (-1, -1), (-1, -1)])
 
     def test_triangle_inequality_permutation_1(self):
         type_res, _ = process_triangle("100", "10", "10")
         self.assertEqual(type_res, "не треугольник")
 
     def test_triangle_inequality_permutation_2(self):
-        type_res, _ = process_triangle("10", "100", "10")
+        type_res, _ = process_triangle("10", "100","10")
         self.assertEqual(type_res, "не треугольник")
 
-    # 5. Проверка геометрии и масштабирования координат
+    # координаты и геометрия
     def test_equilateral_coordinates_bounds(self):
         _, coords = process_triangle("50", "50", "50")
         for x, y in coords:
