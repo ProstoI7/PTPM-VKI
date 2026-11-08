@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовый форум — фикстура</title>
+</head>
+<body>
+    <h1>Тема: Лабораторная работа</h1>
+
+    <div class="comment" data-comment-id="101">
+        <span class="comment-author">alice</span>
+        <div class="comment-message">
+            Привет! Это <b>первое</b> сообщение.
+        </div>
+    </div>
+
+    <div class="comment" data-comment-id="102">
+        <span class="comment-author">bob</span>
+        <div class="comment-message">
+            Согласен с <i>alice</i>, всё отлично.
+        </div>
+    </div>
+
+    <div class="comment" data-comment-id="103">
+        <span class="comment-author">alice</span>
+        <div class="comment-message">
+            Второе сообщение от alice.
+        </div>
+    </div>
+
+    <!-- Комментарий без ID — должен быть проигнорирован -->
+    <div class="comment">
+        <span class="comment-author">ghost</span>
+        <div class="comment-message">Без ID</div>
+    </div>
+
+    <!-- Комментарий с невалидным ID — должен быть проигнорирован -->
+    <div class="comment" data-comment-id="not-a-number">
+        <span class="comment-author">charlie</span>
+        <div class="comment-message">Кривой ID</div>
+    </div>
+</body>
+</html>
